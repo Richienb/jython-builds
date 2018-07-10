@@ -18,7 +18,7 @@ before_install:
 
 install:
   - curl -L -o jython-installer.jar http://search.maven.org/remotecontent?filepath=org/python/jython-installer/2.7.0/jython-installer-2.7.0.jar
-  - java -jar jython-installer.jar -v > $TRAVIS_BUILD_DIR/build/2/version.txt
+  - java -jar jython-installer.jar --version > $TRAVIS_BUILD_DIR/build/2/version.txt
 
 script:
   - cd $TRAVIS_BUILD_DIR/build/2
