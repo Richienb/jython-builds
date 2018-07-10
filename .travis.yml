@@ -1,0 +1,28 @@
+sudo:              false
+
+addons:
+  apt:
+    packages:
+      - openjdk-8-jre
+
+language:          generic
+
+branches:
+  - master
+
+before_install:
+  - #git remote set-url origin https://Richienb:${github_token}@github.com/Richienb/jython-builds.git
+  - git config --global user.email "richiebendall@gmail.com"
+  - git config --global user.name "Richienb"
+  - #find $TRAVIS_BUILD_DIR/ci -type f -iname "*.sh" -exec chmod +x {} \;
+
+install:
+  - curl -L -o jython-installer.jar http://search.maven.org/remotecontent?filepath=org/python/jython-installer/2.7.0/jython-installer-2.7.0.jar
+  - java -jar jython-installer.jar --version > $TRAVIS_BUILD_DIR/build/2/version.txt
+
+script:
+  - cd $TRAVIS_BUILD_DIR/build/2
+  - java -jar jython-installer.jar --silent --type standalone --verbose && dir && mv jython.jar standalone.jar
+
+notifications:
+  email:           false
