@@ -3,7 +3,7 @@ sudo:              false
 addons:
   apt:
     packages:
-      - openjdk-8-jre
+      - openjdk-8-jdk
 
 language:          generic
 
@@ -11,17 +11,21 @@ branches:
   - master
 
 before_install:
-  - #git remote set-url origin https://Richienb:${github_token}@github.com/Richienb/jython-builds.git
+  - git remote set-url origin https://Richienb:${github_token}@github.com/Richienb/jython-builds.git
   - git config --global user.email "richiebendall@gmail.com"
   - git config --global user.name "Richienb"
-  - #find $TRAVIS_BUILD_DIR/ci -type f -iname "*.sh" -exec chmod +x {} \;
 
 install:
-  - curl -L -o jython-installer.jar http://search.maven.org/remotecontent?filepath=org/python/jython-installer/2.7.0/jython-installer-2.7.0.jar
-  - java -jar jython-installer.jar --version > $TRAVIS_BUILD_DIR/build/2/version.txt
+  - git clone https://github.com/jythontools/jython.git jython2 && cd jython2 && ant installer
+  - java -jar jython-standalone.jar getver.py > $TRAVIS_BUILD_DIR/build/2/info.txt
+  - cd ..
+  - git clone https://github.com/jythontools/jython.git jython3 && cd jython3 && ant installer
+  - java -jar jython-standalone.jar getver.py > $TRAVIS_BUILD_DIR/build/3/info.txt
+  - cd ..
 
 script:
   - cd $TRAVIS_BUILD_DIR/build/2
+  - cp $TRAVIS_BUILD_DIR/jython2/jython-standalone.jar standalone.jar
   - java -jar jython-installer.jar --silent --type standalone --verbose && dir && mv jython.jar standalone.jar
 
 notifications:
