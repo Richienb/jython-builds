@@ -16,10 +16,10 @@ before_install:
   - git config --global user.name "Richienb"
 
 install:
-  - git clone https://github.com/jythontools/jython.git jython2 && cd jython2 && ant installer && ant standalone
+  - git clone https://github.com/jythontools/jython.git jython2 && cd jython2 && ant installer && ant jar-standalone
   - java -jar jython-standalone.jar getver.py > $TRAVIS_BUILD_DIR/build/2/info.txt
   - cd ..
-  - git clone https://github.com/jythontools/jython.git jython3 && cd jython3 && ant installer && ant standalone
+  - git clone https://github.com/jythontools/jython.git jython3 && cd jython3 && ant installer && ant jar-standalone
   - java -jar jython-standalone.jar getver.py > $TRAVIS_BUILD_DIR/build/3/info.txt
   - cd ..
 
