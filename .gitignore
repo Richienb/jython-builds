@@ -1,3 +1,8 @@
 # Jython source directories
 jython2/
 jython3/
+# Unzipped directories
+build/2/minimal
+build/2/standard
+build/3/minimal
+build/3/standard
