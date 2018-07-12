@@ -1,2 +1,8 @@
+# Jython source directories
 jython2/
 jython3/
+# Unzipped directories
+$TRAVIS_BUILD_DIR/build/2/minimal
+$TRAVIS_BUILD_DIR/build/2/standard
+$TRAVIS_BUILD_DIR/build/3/minimal
+$TRAVIS_BUILD_DIR/build/3/standard

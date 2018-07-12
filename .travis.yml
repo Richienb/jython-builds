@@ -1,32 +1,73 @@
+# Disable sudo
 sudo:              false
 
+# Install Java 8 JDK
 addons:
   apt:
     packages:
       - openjdk-8-jdk
 
+# Set language
 language:          generic
 
-branches:
-  - master
+# Set build branch
+branches: master
 
 before_install:
+  # Allows git push
   - git remote set-url origin https://Richienb:${github_token}@github.com/Richienb/jython-builds.git
+
+  # Set pushing credentials
   - git config --global user.email "richiebendall@gmail.com"
   - git config --global user.name "Richienb"
 
+  # Set variables for paths
+  - SOURCE_2=$TRAVIS_BUILD_DIR/jython2/dist
+  - SOURCE_3=$TRAVIS_BUILD_DIR/jython3/dist
+  - BUILD_2=$TRAVIS_BUILD_DIR/build/2
+  - BUILD_3=$TRAVIS_BUILD_DIR/build/3
+
+  # Set the date to a variable
+  - DATE=`date +%d-%m-%Y`
+
 install:
-  - git clone https://github.com/jythontools/jython.git jython2 && cd jython2 && ant installer && ant jar-standalone && cd ..
-  - git clone https://github.com/jythontools/jython.git jython3 && cd jython3 && ant installer && ant jar-standalone && cd ..
+  # Build Jython 2
+  - git clone https://github.com/jythontools/jython.git jython2 && cd jython2 && ant installer && cd ..
+
+  # Build Jython 3
+  - git clone https://github.com/jythontools/jython.git jython3 && cd jython3 && ant installer && cd ..
 
 before_script:
-  - java -jar $PWD/jython2/jython-standalone.jar getver.py > $TRAVIS_BUILD_DIR/build/2/info.txt
-  - java -jar $PWD/jython3/jython-standalone.jar getver.py > $TRAVIS_BUILD_DIR/build/3/info.txt
+  # Get the current version and append to file
+  - java -jar $SOURCE_2/jython-standalone.jar getver.py |& tee $BUILD_2/info.txt
+  - java -jar $SOURCE_3/jython-standalone.jar getver.py |& tee $BUILD_3/info.txt
 
 script:
-  - cd $TRAVIS_BUILD_DIR/build/2
-  - cp $TRAVIS_BUILD_DIR/jython2/jython-standalone.jar standalone.jar
-  - java -jar jython-installer.jar --silent --type standalone --verbose && dir && mv jython.jar standalone.jar
+  # Create Jython 2 files
+  - cd $BUILD_2
+  - cp $SOURCE_2/jython-standalone.jar standalone.jar
+  - java -jar $SOURCE_2/jython-installer.jar --silent --directory minimal --type minimum --include mod --verbose
+  - tar -zcvf minimal.tar.gz minimal/
+  - java -jar $SOURCE_2/jython-installer.jar --silent --directory standard --type minimum --include mod ensurepip --verbose
+  - tar -zcvf standard.tar.gz standard/
+
+  # Commit
+  - git add * && git diff-index --quiet HEAD || git commit -m "$DATE Updated Jyton 2 Files [skip ci]"
+
+  # Create Jython 3 files
+  - cd $BUILD_3
+  - cp $SOURCE_3/jython-standalone.jar standalone.jar
+  - java -jar $SOURCE_3/jython-installer.jar --silent --directory minimal --type minimum --include mod --verbose
+  - tar -zcvf minimal.tar.gz minimal/
+  - java -jar $SOURCE_3/jython-installer.jar --silent --directory standard --type minimum --include mod ensurepip --verbose
+  - tar -zcvf standard.tar.gz standard/
+
+  # Commit
+  - git add * && git diff-index --quiet HEAD || git commit -m "$DATE Updated Jyton 3 Files [skip ci]"
+
+after_script:
+  # Push changes
+  - git push origin HEAD:master
 
 notifications:
   email:           false

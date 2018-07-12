@@ -1,4 +1,4 @@
-usage:
+Usage:
        java -jar jython-installer.jar [-c | -s | -A] [-d dir] [-t type] [-i
        part(s)] [-e part(s)] [-v] [-h | -?]
 
