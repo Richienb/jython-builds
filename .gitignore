@@ -1,8 +1,15 @@
 # Jython source directories
 jython2/
 jython3/
+
 # Unzipped directories
 build/2/minimal
 build/2/standard
 build/3/minimal
 build/3/standard
+
+# Python27 DLL
+pydll.zip
+pydll/
+build/3/minimal/Python27.dll
+build/3/standard/Python27.dll

@@ -11,7 +11,7 @@ addons:
 language:          generic
 
 # Set build branch
-branches: master
+branches:          master
 
 before_install:
   # Allows git push
@@ -37,6 +37,12 @@ install:
   # Build Jython 3
   - git clone https://github.com/jythontools/jython.git jython3 && cd jython3 && ant installer && cd ..
 
+  # Fetch Python27 DLL
+  - curl -L -o pydll.zip https://www.dllme.com/zip-download.php?code=02499a2f1fd874de11787687c0b1de9c&type=dll&file=14091
+  - unzip pydll.zip -d $TRAVIS_BUILD_DIR/pydll
+  - cp ./pydll/Python27.dll $BUILD_3/minimal/bin/Python27.dll
+  - cp ./pydll/Python27.dll $BUILD_3/standard/bin/Python27.dll
+
 before_script:
   # Get the current version and append to file
   - java -jar $SOURCE_2/jython-standalone.jar getver.py |& tee $BUILD_2/info.txt
@@ -52,7 +58,7 @@ script:
   - tar -zcf standard.tar.gz standard/
 
   # Commit
-  - git add * && git diff-index --quiet HEAD || git commit -m "$DATE Updated Jyton 2 Files [skip ci]"
+  - git add * && git diff-index --quiet HEAD || git commit -m "$DATE Updated Jython 2 Files [skip ci]"
 
   # Create Jython 3 files
   - cd $BUILD_3
@@ -63,7 +69,7 @@ script:
   - tar -zcf standard.tar.gz standard/
 
   # Commit
-  - git add * && git diff-index --quiet HEAD || git commit -m "$DATE Updated Jyton 3 Files [skip ci]"
+  - git add * && git diff-index --quiet HEAD || git commit -m "$DATE Updated Jython 3 Files [skip ci]"
 
 after_script:
   # Push changes
