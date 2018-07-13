@@ -38,8 +38,8 @@ install:
   - git clone https://github.com/jythontools/jython.git jython3 && cd jython3 && ant installer && cd ..
 
   # Insert Python27 DLL
-  - cp ./deps/Python27.dll $BUILD_3/minimal/bin/Python27.dll
-  - cp ./deps/Python27.dll $BUILD_3/standard/bin/Python27.dll
+  - cp $TRAVIS_BUILD_DIR/deps/Python27.dll $BUILD_3/minimal/bin/Python27.dll
+  - cp $TRAVIS_BUILD_DIR/deps/Python27.dll $BUILD_3/standard/bin/Python27.dll
 
 before_script:
   # Get the current version and append to file
