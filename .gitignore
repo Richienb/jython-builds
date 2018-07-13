@@ -9,7 +9,5 @@ build/3/minimal
 build/3/standard
 
 # Python27 DLL
-pydll.zip
-pydll/
 build/3/minimal/Python27.dll
 build/3/standard/Python27.dll
