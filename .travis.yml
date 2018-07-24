@@ -7,6 +7,13 @@ addons:
     packages:
       - openjdk-8-jdk
 
+cache:
+  directories:
+    # Cache the .cache directory
+    - $HOME/.cache
+    # Cache the .thumbs directory
+    - $HOME/.thumbs
+
 # Set language
 language:          generic
 
@@ -49,6 +56,10 @@ before_script:
   # Get the current version and append to file
   - java -jar $SOURCE_2/jython-standalone.jar getver.py |& tee $BUILD_2/info.txt
   - java -jar $SOURCE_3/jython-standalone.jar getver.py |& tee $BUILD_3/info.txt
+
+  # Copy the jython installer to the corresponding directory
+  - cp $SOURCE_2/jython-installer.jar $BUILD_2/installer.jar
+  - cp $SOURCE_3/jython-installer.jar $BUILD_3/installer.jar
 
 script:
   # Create Jython 2 files
