@@ -1,2 +1,7 @@
+import platform
 import sys
-print(str(sys.version_info).strip("sys.version_info(").strip(")"))
+print("Running on {} {} | Python Version {}.{}.{}".format(
+    platform.system(), platform.release(),
+    list(sys.version_info)[0],
+    list(sys.version_info)[1],
+    list(sys.version_info)[2]))
