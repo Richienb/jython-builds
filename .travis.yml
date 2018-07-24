@@ -54,8 +54,8 @@ install:
 
 before_script:
   # Get the current version and append to file
-  - java -jar $SOURCE_2/jython-standalone.jar getver.py |& tee $BUILD_2/info.txt
-  - java -jar $SOURCE_3/jython-standalone.jar getver.py |& tee $BUILD_3/info.txt
+  - java -jar $SOURCE_2/jython-standalone.jar $TRAVIS_BUILD_DIR/ci/getver.py |& tee $BUILD_2/info.txt
+  - java -jar $SOURCE_3/jython-standalone.jar $TRAVIS_BUILD_DIR/ci/getver.py |& tee $BUILD_3/info.txt
 
   # Copy the jython installer to the corresponding directory
   - cp $SOURCE_2/jython-installer.jar $BUILD_2/installer.jar
