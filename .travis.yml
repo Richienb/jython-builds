@@ -37,56 +37,71 @@ before_install:
   # Set the date to a variable
   - DATE=`date +%d-%m-%Y`
 
-  # Clear the build directories
-  - rm -rf $BUILD_2/*
-  - rm -rf $BUILD_3/*
-
-install:
-  # Build Jython 2
-  - git clone https://github.com/jythontools/jython.git jython2 && cd jython2 && ant installer && cd ..
-
-  # Build Jython 3
-  - git clone https://github.com/jythontools/jython.git jython3 && cd jython3 && ant installer && cd ..
-
-  # Insert Python27 DLL - WIP
-  # cp -r ./deps/Python27.dll ./build/3/minimal/bin/Python27.dll
-  # cp -r ./deps/Python27.dll ./build/3/standard/bin/Python27.dll
-
-before_script:
-  # Get the current version and append to file
-  - java -jar $SOURCE_2/jython-standalone.jar $TRAVIS_BUILD_DIR/ci/getver.py |& tee $BUILD_2/info.txt
-  - java -jar $SOURCE_3/jython-standalone.jar $TRAVIS_BUILD_DIR/ci/getver.py |& tee $BUILD_3/info.txt
-
-  # Copy the jython installer to the corresponding directory
-  - cp $SOURCE_2/jython-installer.jar $BUILD_2/installer.jar
-  - cp $SOURCE_3/jython-installer.jar $BUILD_3/installer.jar
-
-script:
-  # Create Jython 2 files
-  - cd $BUILD_2
-  - cp $SOURCE_2/jython-standalone.jar standalone.jar
-  - java -jar $SOURCE_2/jython-installer.jar --silent --directory minimal --type minimum --include mod
-  - tar -zcf minimal.tar.gz minimal/
-  - java -jar $SOURCE_2/jython-installer.jar --silent --directory standard --type minimum --include mod ensurepip
-  - tar -zcf standard.tar.gz standard/
-
-  # Commit
-  - git add * && git diff-index --quiet HEAD || git commit -m "CI | $DATE Updated Jython 2 Files [skip ci]"
-
-  # Create Jython 3 files
-  - cd $BUILD_3
-  - cp $SOURCE_3/jython-standalone.jar standalone.jar
-  - java -jar $SOURCE_3/jython-installer.jar --silent --directory minimal --type minimum --include mod
-  - tar -zcf minimal.tar.gz minimal/
-  - java -jar $SOURCE_3/jython-installer.jar --silent --directory standard --type minimum --include mod ensurepip
-  - tar -zcf standard.tar.gz standard/
-
-  # Commit
-  - git add * && git diff-index --quiet HEAD || git commit -m "CI | $DATE Updated Jython 3 Files [skip ci]"
-
 after_script:
   # Push changes
   - git push origin HEAD:master
+
+jobs:
+  include:
+    - stage: Build Jython 2
+
+      install:
+        # Clear the build directory
+        - rm -rf $BUILD_2/*
+
+        # Build Jython 2
+        - git clone https://github.com/jythontools/jython.git jython2 && cd jython2 && ant installer && cd ..
+
+      before_script:
+        # Get the current version and append to file
+        - java -jar $SOURCE_2/jython-standalone.jar $TRAVIS_BUILD_DIR/ci/getver.py |& tee $BUILD_2/info.txt
+
+        # Copy the jython installer to the corresponding directory
+        - cp $SOURCE_2/jython-installer.jar $BUILD_2/installer.jar
+
+      script:
+        # Create Jython 2 files
+        - cd $BUILD_2
+        - cp $SOURCE_2/jython-standalone.jar standalone.jar
+        - java -jar $SOURCE_2/jython-installer.jar --silent --directory minimal --type minimum --include mod
+        - tar -zcf minimal.tar.gz minimal/
+        - java -jar $SOURCE_2/jython-installer.jar --silent --directory standard --type minimum --include mod ensurepip
+        - tar -zcf standard.tar.gz standard/
+
+        # Commit
+        - git add * && git diff-index --quiet HEAD || git commit -m "CI | $DATE Updated Jython 2 Files [skip ci]"
+
+    - stage: Build Jython 3
+
+      install:
+        # Clear the build directory
+        - rm -rf $BUILD_3/*
+
+        # Build Jython 3
+        - git clone https://github.com/jythontools/jython.git jython3 && cd jython3 && ant installer && cd ..
+
+        # Insert Python27 DLL - WIP
+        # cp -r ./deps/Python27.dll ./build/3/minimal/bin/Python27.dll
+        # cp -r ./deps/Python27.dll ./build/3/standard/bin/Python27.dll
+
+      before_script:
+        # Get the current version and append to file
+        - java -jar $SOURCE_3/jython-standalone.jar $TRAVIS_BUILD_DIR/ci/getver.py |& tee $BUILD_3/info.txt
+
+        # Copy the jython installer to the corresponding directory
+        - cp $SOURCE_3/jython-installer.jar $BUILD_3/installer.jar
+
+      script:
+        # Create Jython 3 files
+        - cd $BUILD_3
+        - cp $SOURCE_3/jython-standalone.jar standalone.jar
+        - java -jar $SOURCE_3/jython-installer.jar --silent --directory minimal --type minimum --include mod
+        - tar -zcf minimal.tar.gz minimal/
+        - java -jar $SOURCE_3/jython-installer.jar --silent --directory standard --type minimum --include mod ensurepip
+        - tar -zcf standard.tar.gz standard/
+
+        # Commit
+        - git add * && git diff-index --quiet HEAD || git commit -m "CI | $DATE Updated Jython 3 Files [skip ci]"
 
 notifications:
   email:           false
