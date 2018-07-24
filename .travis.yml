@@ -50,7 +50,10 @@ jobs:
         - rm -rf $BUILD_2/*
 
         # Build Jython 2
-        - git clone https://github.com/jythontools/jython.git jython2 && cd jython2 && ant installer && cd ..
+        - git clone https://github.com/jythontools/jython.git jython2
+        - cd jython2
+        - ant installer
+        - cd ..
 
       before_script:
         # Get the current version and append to file
@@ -78,7 +81,10 @@ jobs:
         - rm -rf $BUILD_3/*
 
         # Build Jython 3
-        - git clone https://github.com/jythontools/jython.git jython3 && cd jython3 && ant installer && cd ..
+        - git clone https://github.com/jythontools/jython.git jython3
+        - cd jython3
+        - ant installer
+        - cd ..
 
         # Insert Python27 DLL - WIP
         # cp -r ./deps/Python27.dll ./build/3/minimal/bin/Python27.dll
