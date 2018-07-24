@@ -1,2 +1,2 @@
 Picked up _JAVA_OPTIONS: -Xmx2048m -Xms512m
-IOError: [Errno 2] File not found - /home/travis/build/Richienb/jython-builds/getver.py (No such file or directory)
+Running on Java 1.8.0_151 | Python Version 2.7.2
