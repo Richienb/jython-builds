@@ -1,4 +1,4 @@
-# Jython Builds [![Build Status](https://travis-ci.com/Richienb/jython-builds.svg?branch=master)](https://travis-ci.com/Richienb/jython-builds)
+# Jython Builds [![Travis Build Status)](https://img.shields.io/travis/com/Richienb/jython-builds.svg?style=for-the-badge&logo=travis&label=Travis%20Build)](https://travis-ci.com/Richienb/jython-builds)
 
 Jython 2 and 3 pre-built, ready for easy distribution and continuous integration
 
