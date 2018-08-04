@@ -12,7 +12,7 @@ install:
   - sudo tar xjf NEWFILENAME.tar.bz2 --directory / # Unzip if the downloaded file was a zip
 ```
 
-Other methods of distribution **are** supported. You can also [download](https://github.com/Richienb/jython-builds/tree/master/build) the `.tar.gz` files.
+Other methods of distribution **are** supported. You can also [download](https://github.com/Richienb/jython-builds/tree/master/build) the `.tar.gz` or `.jar` files.
 
 ## Generate the builds yourself
 
