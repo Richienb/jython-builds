@@ -19,9 +19,10 @@ Other methods of distribution **are** supported. You can also [download](https:/
 ### You will need
 - [Makefile](https://www.gnu.org/software/make/manual/make.html#Introduction)
 - [Tar](https://www.gnu.org/software/tar/manual/html_node/What-tar-Does.html#SEC4)
-- Shell environment ([Linux](https://www.linux.com/what-is-linux) or [Git](https://git-scm.com) on any OS)
-- [Git](https://git-scm.com)
+- A terminal environment ([Linux](https://www.linux.com/what-is-linux) or [Git](https://git-scm.com/downloads) on any OS)
+- [Git](https://git-scm.com/downloads)
 - [Java JDK 8+](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- [Apache Ant](https://ant.apache.org/bindownload.cgi)
 
 ### Script
 ```sh
