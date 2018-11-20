@@ -1,6 +1,3 @@
-# Disable sudo
-sudo:              false
-
 # Install Java 8 JDK
 addons:
   apt:
