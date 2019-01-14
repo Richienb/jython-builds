@@ -1,15 +1,12 @@
+dist: xenial
+
 # Install Java 8 JDK
 addons:
   apt:
     packages:
       - openjdk-8-jdk
 
-cache:
-  directories:
-    # Cache the .cache directory
-    - $HOME/.cache
-    # Cache the .thumbs directory
-    - $HOME/.thumbs
+cache: apt
 
 # Set language
 language:          generic
