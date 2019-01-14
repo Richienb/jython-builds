@@ -82,10 +82,6 @@ jobs:
         - ant installer
         - cd ..
 
-        # Insert Python27 DLL - WIP
-        # cp -r ./deps/Python27.dll ./build/3/minimal/bin/Python27.dll
-        # cp -r ./deps/Python27.dll ./build/3/standard/bin/Python27.dll
-
       before_script:
         # Get the current version and append to file
         - java -jar $SOURCE_3/jython-standalone.jar $TRAVIS_BUILD_DIR/ci/getver.py |& tee $BUILD_3/info.txt
