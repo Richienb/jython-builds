@@ -1,3 +1,4 @@
+# Set build distribution
 dist: xenial
 
 # Install Java 8 JDK
@@ -6,6 +7,7 @@ addons:
     packages:
       - openjdk-8-jdk
 
+# Cache APT packages
 cache: apt
 
 # Set language
