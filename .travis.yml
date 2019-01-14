@@ -78,7 +78,7 @@ jobs:
         - rm -rf $BUILD_3/*
 
         # Build Jython 3
-        - git clone https://github.com/jythontools/jython.git jython3
+        - git clone https://github.com/jython/jython3.git jython3
         - cd jython3
         - ant installer
         - cd ..
