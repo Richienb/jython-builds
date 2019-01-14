@@ -6,6 +6,11 @@ addons:
   apt:
     packages:
       - openjdk-8-jdk
+      
+# Configure Git
+git:
+  depth: false
+  quiet: true
 
 # Cache APT packages
 cache: apt
