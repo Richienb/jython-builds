@@ -44,7 +44,7 @@ after_script:
 
 jobs:
   include:
-    - stage: Build Jython 2
+    - stage: Build Jython
 
       install:
         # Clear the build directory
@@ -75,7 +75,7 @@ jobs:
         # Commit
         - git add * && git diff-index --quiet HEAD || git commit -m "CI | $DATE Updated Jython 2 Files [skip ci]"
 
-    - stage: Build Jython 3
+    -
 
       install:
         # Clear the build directory
