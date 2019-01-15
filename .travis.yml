@@ -10,7 +10,6 @@ addons:
 # Configure Git
 git:
   depth: false
-  quiet: true
 
 # Cache APT packages
 cache: apt
