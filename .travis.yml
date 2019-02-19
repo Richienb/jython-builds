@@ -6,6 +6,7 @@ addons:
   apt:
     packages:
       - openjdk-8-jdk
+      - ant
 
 # Cache APT packages
 cache: apt
