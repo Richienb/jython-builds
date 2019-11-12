@@ -1,10 +1,1 @@
-Exception in thread "main" java.lang.NoClassDefFoundError: com/google/common/collect/MapMaker
-	at org.python.core.ThreadStateMapping.<clinit>(ThreadStateMapping.java:31)
-	at org.python.core.Py.<clinit>(Py.java:1734)
-	at org.python.core.PySystemState.<clinit>(PySystemState.java:72)
-	at org.python.util.jython.main(jython.java:531)
-Caused by: java.lang.ClassNotFoundException: com.google.common.collect.MapMaker
-	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:583)
-	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)
-	... 4 more
+Running on Java 11.0.2 | Python Version 2.7.2
